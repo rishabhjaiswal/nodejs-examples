@@ -1,21 +1,15 @@
-var rect = require('./rectangle');
+const http = require('http');
 
-function solveReactangle  (l, b) {
-    console.log("Solveing for react with length : ", l);
-    console.log("Solveing for react with breadth : ", b);
-    rect (l, b, (err, rectangle) => {
-        if (err) {
-            console.log("Error: ",err.message);
-        } 
-        else {
-            console.log("area of reactangle : ", rectangle.area());
-            console.log("perimeter of reactangle : ", rectangle.perimeter());
-        }
-    });
-    console.log("thiss statement ius after rect call")
-}
+const hostname = 'localhost';
+const port = 3000;
 
-solveReactangle(2,3);
-solveReactangle(2,4);
-solveReactangle(0,5);
-solveReactangle(5,3);
+const server = http.createServer ((req, res) => {
+    console.log(req.headers);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html')
+    res.end('<html><body><h1>hello world!!!</h1></body></html>')
+});
+
+server.listen(port, hostname, () => {
+    console.log(`Server runnning at http://${hostname}:${port}`);
+});
